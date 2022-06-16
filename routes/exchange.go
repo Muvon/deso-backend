@@ -579,6 +579,8 @@ func APITransactionToResponse(
 		}
 	}
 
+	ret.StateOperation = stateOp
+
 	return ret
 }
 
