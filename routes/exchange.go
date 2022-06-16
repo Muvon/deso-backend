@@ -456,6 +456,8 @@ type TransactionResponse struct {
 
 	// The ExtraData added to this transaction
 	ExtraData map[string]string `json:",omitempty"`
+
+	StateOperation *lib.StateOperation `json:",omitempty"`
 }
 
 // TransactionInfoResponse contains information about the transaction
@@ -567,6 +569,8 @@ func APITransactionToResponse(
 	if txnMeta != nil {
 		ret.BlockHashHex = txnMeta.BlockHashHex
 	}
+
+	ret.StateOperation = utxoView.GetStateOperation(txnn.Hash())
 
 	return ret
 }
