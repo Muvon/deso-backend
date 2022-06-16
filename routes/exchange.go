@@ -572,7 +572,7 @@ func APITransactionToResponse(
 
 	stateOp := utxoView.GetStateOperation(txnn.Hash())
 
-	if stateOp.Posts != nil {
+	if stateOp != nil && stateOp.Posts != nil {
 		for _, post := range stateOp.Posts {
 			post.AdditionalNFTRoyaltiesToCreatorsBasisPoints = nil
 			post.AdditionalNFTRoyaltiesToCoinsBasisPoints = nil
