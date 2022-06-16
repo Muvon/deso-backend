@@ -570,7 +570,15 @@ func APITransactionToResponse(
 		ret.BlockHashHex = txnMeta.BlockHashHex
 	}
 
-	ret.StateOperation = utxoView.GetStateOperation(txnn.Hash())
+	stateOp := utxoView.GetStateOperation(txnn.Hash())
+
+	if stateOp.Posts != nil {
+		for idx := range stateOp.Posts {
+			post := &stateOp.Posts[idx]
+			post.AdditionalNFTRoyaltiesToCreatorsBasisPoints = nil
+			post.AdditionalNFTRoyaltiesToCoinsBasisPoints = nil
+		}
+	}
 
 	return ret
 }
